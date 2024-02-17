@@ -43,6 +43,11 @@ function depositar(array $conta, float $valor): array
   return $conta;
 }
 
+function exibeConta(array $conta) {
+  ['titular' => $titular, 'saldo' => $saldo] = $conta;
+  echo "<li>Titular: $titular, Saldo R$ $saldo</li>";
+}
+
 $contas = [
   '12345678909' => ['titular' => 'Fulano', 'saldo' => 1000],
   '09876543212' => ['titular' => 'Pafúncio', 'saldo' => 500.99],

@@ -21,5 +21,5 @@ $idades[2] = 37;
 
 // iterando:
 for ($i = 0; $i < count($idades); $i++) {
-  echo"$idades[$i] ";
+	echo "$idades[$i] ";
 }
