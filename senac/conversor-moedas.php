@@ -37,7 +37,7 @@ $moedas = [
 			['cotacao' => $cotacao, 'codigo' => $codigo] = $moeda;
 			?>
 			<dt>
-				<?= "<h3>Conversão para $nomeMoeda, cotação R$ $cotacao"; ?>
+				<?= "<h3>Conversão para $nomeMoeda, cotação R$ $cotacao</h3>"; ?>
 			</dt>
 			<dd>
 				<?php printf("Valor: %.2f %s", converteParaMoeda($valorEmReais, $cotacao), $codigo); ?>
