@@ -17,18 +17,23 @@ echo "$idadeA - $idade1 - $primeiroElemento" . PHP_EOL;
 echo "$idadeB - $idade2" . PHP_EOL;
 echo "$idade3 - $idade3 - $terceiroElemento" . PHP_EOL;
 
-// para arrays associativos sem índice numérico, deve-se passar o índice de cada valor;
-// não é possível misturar as duas sintaxes (Cannot mix keyed and unkeyed array entries in assignments)
+// a função list utiliza índices numéricos; para arrays associativos sem índice numérico, deve-se passar o
+// índice de cada valor; não é possível misturar as duas sintaxes (Cannot mix keyed and unkeyed array entries in assignments)
 $contas = [
-  '12345678909' => ['titular' => 'Fulano', 'saldo' => 1000],
-  '09876543212' => ['titular' => 'Pafúncio', 'saldo' => 500.99],
-  '18273667890' => ['titular' => 'Maria', 'saldo' => 3975.89]
+	'12345678909' => ['titular' => 'Fulano', 'saldo' => 1000],
+	'09876543212' => ['titular' => 'Pafúncio', 'saldo' => 500.99],
+	'18273667890' => ['titular' => 'Maria', 'saldo' => 3975.89]
 ];
 
 foreach ($contas as $cpf => $conta) {
-  // list($titular, $saldo) = $conta; // Warning: Undefined array key
-  list('titular' => $titular, 'saldo' => $saldo) = $conta;
-  echo "$cpf - $titular - R$ $saldo" . PHP_EOL;
+	// list($titular, $saldo) = $conta; // Warning: Undefined array key
+	list('titular' => $titular, 'saldo' => $saldo) = $conta;
+	echo "$cpf - $titular - R$ $saldo" . PHP_EOL;
+}
+
+// também é possível utilizar da seguinte forma
+foreach ($contas as ['titular' => $titular, 'saldo' => $saldo]) {
+	echo "$titular possui $saldo reais" . PHP_EOL;
 }
 
 // a partir do PHP 7.1 pode-se utilizar a sintaxe reduzida, similar ao array:
