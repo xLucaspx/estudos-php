@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Formulário</title>
+</head>
+
+<body>
+	<h1>Cadastro</h1>
+
+	<form action="form.php" method="post">
+		<legend>Cadastre-se com PHP</legend>
+
+		<!-- Nome -->
+		<fieldset>
+			<label for="nome">Nome completo: </label>
+			<input type="text" id="nome" name="nome" minlength="3" maxlength="75" required autocomplete="name">
+		</fieldset>
+
+		<!-- Email -->
+		<fieldset>
+			<label for="email">Email: </label>
+			<input type="email" id="email" name="email" minlength="3" maxlength="50" required autocomplete="email"
+				pattern="^\w+([\.\-]?\w+)*@\w+([\.\-]?\w+)*(\.\w{2,3})+$">
+		</fieldset>
+
+		<!-- Telefone -->
+		<fieldset>
+			<label for="fone">Telefone: </label>
+			<input type="tel" id="fone" name="telefone" title="Insira DDD e número de telefone" minlength="10" maxlength="25"
+				required autocomplete="tel"
+				pattern="^[\(]?(?:[14689][1-9]|2[12478]|3[1234578]|5[1345]|7[134579])[\)]? ?(?:[2-8]|9 ?[1-9])[0-9]{3}[\-]? ?[0-9]{4}$">
+		</fieldset>
+
+		<!-- Cep -->
+		<fieldset>
+			<label for="cep">CEP: </label>
+			<input type="text" id="cep" name="cep" minlength="8" maxlength="9" required autocomplete="postal-code"
+				pattern="^[\d]{5}-?[\d]{3}$">
+		</fieldset>
+
+		<!-- Logradouro -->
+		<fieldset>
+			<label for="logradouro">Endereço: </label>
+			<input type="text" id="logradouro" name="logradouro" minlength="5" maxlength="100" required
+				autocomplete="address-line1">
+		</fieldset>
+
+		<!-- Bairro -->
+		<fieldset>
+			<label for="bairro">Bairro: </label>
+			<input type="text" id="bairro" name="bairro" minlength="3" maxlength="50" required autocomplete="address-level3">
+		</fieldset>
+
+		<!-- Número -->
+		<fieldset>
+			<label for="numero" class="form__label">Número: </label>
+			<input type="text" id="numero" name="numero" maxlength="10" autocomplete="address-line2">
+		</fieldset>
+
+		<!-- Complemento -->
+		<fieldset>
+			<label for="complemento" class="form__label">Complemento: </label>
+			<input type="text" id="complemento" name="complemento" maxlength="50" autocomplete="address-line3">
+		</fieldset>
+
+		<!-- Cidade -->
+		<fieldset>
+			<label for="cidade">Cidade: </label>
+			<input type="text" id="cidade" name="cidade" minlength="3" maxlength="50" required autocomplete="address-level2">
+		</fieldset>
+
+		<!-- UF -->
+		<fieldset>
+			<label for="uf">UF: </label>
+			<input type="text" id="uf" name="uf" minlength="2" maxlength="2" required autocomplete="address-level1">
+		</fieldset>
+
+		<fieldset>
+			<label for="mensagem">Mensagem: </label>
+			<textarea name="mensagem" id="mensagem" cols="30" rows="10" minlength="10" maxlength="250" required></textarea>
+		</fieldset>
+
+		<fieldset>
+			<button type="submit">Enviar</button>
+		</fieldset>
+	</form>
+</body>
+
+<script>
+	const inputCep = document.getElementById('cep');
+	const logradouro = document.getElementById("logradouro");
+	const bairro = document.getElementById("bairro");
+	const cidade = document.getElementById("cidade");
+	const uf = document.getElementById("uf");
+
+	inputCep.onchange = async (evento) => {
+		try {
+			if (inputCep.validity.patternMismatch) throw new Error("CEP inválido");
+
+			const cep = inputCep.value;
+
+			const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+			const dados = await res.json();
+
+			if (dados.erro) throw new Error("CEP inválido");
+
+			logradouro.value = dados.logradouro;
+			bairro.value = dados.bairro;
+			cidade.value = dados.localidade;
+			uf.value = dados.uf;
+		} catch (error) {
+			alert(error.message);
+			inputCep.value = "";
+		}
+	}
+</script>
+</html>
