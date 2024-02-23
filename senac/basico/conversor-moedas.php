@@ -30,7 +30,7 @@ $moedas = [
 
 <body>
 	<h1>Conversor de moedas</h1>
-	<?php printf("<h2>Valor a ser convertido: R$ %.2f</h2>", $valorEmReais); ?>
+	<?= sprintf("<h2>Valor a ser convertido: R$ %.2f</h2>", $valorEmReais); ?>
 
 	<dl>
 		<?php foreach ($moedas as $nomeMoeda => $moeda) {
@@ -40,7 +40,7 @@ $moedas = [
 				<?= "<h3>Conversão para $nomeMoeda, cotação R$ $cotacao</h3>"; ?>
 			</dt>
 			<dd>
-				<?php printf("Valor: %.2f %s", converteParaMoeda($valorEmReais, $cotacao), $codigo); ?>
+				<?= sprintf("Valor: %.2f %s", converteParaMoeda($valorEmReais, $cotacao), $codigo); ?>
 			</dd>
 		<?php } ?>
 	</dl>
