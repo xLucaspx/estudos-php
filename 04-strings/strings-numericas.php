@@ -16,6 +16,11 @@ var_dump((int) $teste); // int(123)
 // também consegue realizar a conversão implícita:
 exibeNumero($teste); // int(123)
 
+$anoNascimento = '2002';
+$idade = getdate()['year'] - $anoNascimento;
+var_dump($idade);
+echo "$idade anos" . PHP_EOL;
+
 /* no PHP 8 houve a RFC Saner Numeric Strings, que trata como strings numéricas apenas strings numéricas realmente válidas
 antes disso, qualquer string que começasse com números era interpretada como uma string numérica e o PHP apenas lançava um aviso
 agora, uma string numérica pode ser: */
@@ -38,4 +43,5 @@ agora, se a string for numérica, ela será tratada como número; caso contrári
 echo "\nComparações:" . PHP_EOL;
 var_dump(0 == 'abc'); // false (true antes do php 8)
 var_dump(0 == '0'); // true
+var_dump(0 === '0'); // false
 var_dump(0 < '42'); // true

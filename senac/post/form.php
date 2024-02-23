@@ -12,17 +12,17 @@ function formataEndereco(string $cep, string $logradouro, string $bairro, string
 	return $endereco;
 }
 
-$nome = $_POST['nome'];
-$email = $_POST['email'];
-$telefone = $_POST['telefone'];
-$cep = $_POST['cep'];
-$logradouro = $_POST['logradouro'];
-$bairro = $_POST['bairro'];
-$numero = $_POST['numero'];
-$complemento = $_POST['complemento'];
-$cidade = $_POST['cidade'];
-$uf = $_POST['uf'];
-$mensagem = $_POST['mensagem'];
+$nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+$telefone = filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_STRING);
+$cep = filter_input(INPUT_POST, 'cep', FILTER_SANITIZE_STRING);
+$logradouro = filter_input(INPUT_POST, 'logradouro', FILTER_SANITIZE_STRING);
+$bairro = filter_input(INPUT_POST, 'bairro', FILTER_SANITIZE_STRING);
+$numero = filter_input(INPUT_POST, 'numero', FILTER_SANITIZE_STRING);
+$complemento = filter_input(INPUT_POST, 'complemento', FILTER_SANITIZE_STRING);
+$cidade = filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_STRING);
+$uf = filter_input(INPUT_POST, 'uf', FILTER_SANITIZE_STRING);
+$mensagem = filter_input(INPUT_POST, 'mensagem', FILTER_SANITIZE_STRING);
 
 $endereco = formataEndereco($cep, $logradouro, $bairro, $numero, $complemento, $cidade, $uf);
 ?>
