@@ -96,13 +96,21 @@
 	const cidade = document.getElementById("cidade");
 	const uf = document.getElementById("uf");
 
-	inputCep.onchange = async (evento) => {
+	inputCep.onchange = async () => {
 		try {
 			if (inputCep.validity.patternMismatch) throw new Error("CEP inválido");
 
 			const cep = inputCep.value;
 
 			const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+			/**
+			 * @property {string} dados.cep        - CEP
+			 * @property {string} dados.logradouro - Endereço
+			 * @property {string} dados.bairro 	   - Bairro
+			 * @property {string} dados.localidade - Cidade
+			 * @property {string} dados.uf         - Estado (UF)
+			 * @property {string} dados.erro       - O erro retornado caso o CPF seja inválido
+			 */
 			const dados = await res.json();
 
 			if (dados.erro) throw new Error("CEP inválido");

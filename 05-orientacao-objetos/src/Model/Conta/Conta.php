@@ -1,4 +1,9 @@
 <?php
+// namespaces: a forma que o PHP oferece para separamos os arquivos. Não precisa ser o mesmo nome da pasta
+// convenção: criar um namespace raíz e cada pasta dentro dele se torna um namespace;
+// ex: Empresa\Projeto\Domain\Abc, onde Empresa\Projeto sempre estará presente e Domain\Abc são as pastas
+namespace Curso\Banco\Model\Conta;
+// a separação é utilizando contrabarra (\)
 
 class Conta
 {
@@ -57,16 +62,16 @@ class Conta
 		if ($valor > $this->saldo)
 			throw new Exception("Saldo insuficiente para realizar a operação!");
 
-		$this->saldo -= $valor;
+		$this->saca($valor);
 		$destino->deposita($valor);
 	}
 
-	public function saldo(): float
+	public function getSaldo(): float
 	{
 		return $this->saldo;
 	}
 
-	public static function totalDeContas(): int
+	public static function getTotalDeContas(): int
 	{
 		return self::$totalDeContas;
 	}
