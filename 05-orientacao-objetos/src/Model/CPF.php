@@ -2,7 +2,8 @@
 
 namespace Curso\Banco\Model;
 
-class CPF
+// classes final não podem ser extendidas
+final class CPF
 {
 	public readonly string $cpf;
 

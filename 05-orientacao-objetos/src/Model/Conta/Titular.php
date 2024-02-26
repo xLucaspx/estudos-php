@@ -5,9 +5,9 @@ namespace Curso\Banco\Model\Conta;
 // para importar uma classe temos duas opções: utilizar o fully qualified name ou importar com `use`.
 // diferentemente de include e require, o use precisa estar no início do arquivo
 // para classes do mesmo namespace, podemos importar na mesma linha passando os nomes entre chaves ({}):
-use Curso\Banco\Model\{Pessoa, Endereco};
+use Curso\Banco\Model\{Autenticavel, Pessoa, Endereco};
 
-class Titular extends Pessoa
+class Titular extends Pessoa implements Autenticavel
 {
 	// a partir do PHP 8 podemos utilizar a promoção de propriedades no construtor; com esta sintaxe,
 	// reduzimos a quantidade de código digitado, pois não precisamos declarar, receber e atribuir; não podemos
@@ -21,6 +21,11 @@ class Titular extends Pessoa
 	)
 	{
 		parent::__construct($cpf, $nome);
+	}
+
+	public function podeAutenticar($senha): bool
+	{
+		return $senha === '#senhaTitular01';
 	}
 
 	public function getEndereco(): Endereco

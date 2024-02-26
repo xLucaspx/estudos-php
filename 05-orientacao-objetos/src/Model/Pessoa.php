@@ -29,7 +29,8 @@ abstract class Pessoa
 		$this->nome = $nome;
 	}
 
-	protected function validaNome(string $nome): void
+	// métodos final não podem ser sobrescritos
+	protected final function validaNome(string $nome): void
 	{
 		if (mb_strlen($nome) < 5)
 			throw new Exception("O nome deve ter mais de 5 caracteres!");
