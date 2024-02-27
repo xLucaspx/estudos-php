@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<title>Formulário de funcionário</title>
+</head>
+<body>
+<h1>Formulário de funcionário</h1>
+
+<form action="" method="post">
+	<fieldset>
+		<legend>Dados pessoais</legend>
+
+		<label for="cpf">CPF: </label>
+		<input type="text" name="cpf" id="cpf" required>
+
+		<label for="nome">Nome: </label>
+		<input type="text" name="nome" id="nome" required>
+
+		<label for="idade">Idade: </label>
+		<input type="number" name="idade" id="idade" required>
+	</fieldset>
+
+	<fieldset>
+		<legend>Dados profissionais</legend>
+
+		<label for="cargo">Cargo: </label>
+		<input type="text" name="cargo" id="cargo" required>
+
+		<label for="salario">Salário R$ </label>
+		<input type="number" step=".01" name="salario" id="salario" required>
+	</fieldset>
+
+	<input type="submit" value="Enviar">
+</form>
+</body>
+</html>

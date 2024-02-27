@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<title>Pessoa</title>
+</head>
+<body>
+
+<form method="post" action="form.php"
+	style="display: flex; flex-direction: column; gap: 1rem; margin: 7rem auto 0; width: 50%">
+	<fieldset>
+		<legend>Cadastro de pessoa</legend>
+
+		<label for="nome">Nome: </label>
+		<input type="text" name="nome" id="nome" required>
+
+		<label for="idade">Idade: </label>
+		<input type="number" name="idade" id="idade" required>
+	</fieldset>
+
+	<fieldset>
+		<legend>Calculadora</legend>
+
+		<label for="valor-1">X: </label>
+		<input type="number" name="valor-1" id="valor-1" required>
+
+		<label for="valor-2">Y: </label>
+		<input type="number" name="valor-2" id="valor-2" required>
+
+		<label for="operacao">Operação</label>
+		<select name="operacao" id="operacao" required>
+			<option value="adicao">+ (X + Y)</option>
+			<option value="subtracao">- (X - Y)</option>
+			<option value="multiplicacao">* (X * Y)</option>
+			<option value="divisao">/ (X / Y)</option>
+			<option value="modulo">% (X % Y)</option>
+			<option value="potencia">^ (X ^ Y)</option>
+		</select>
+	</fieldset>
+
+	<input type="submit" value="Enviar" style="width: 175px; margin: 0 auto">
+</form>
+</body>
+</html>
