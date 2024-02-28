@@ -8,7 +8,7 @@ class Paciente extends Pessoa
 		string $cpf,
 		string $nome,
 		int $idade,
-		public readonly string $sintoma
+		public readonly string $sintomas
 	)
 	{
 		parent::__construct($cpf, $nome, $idade);

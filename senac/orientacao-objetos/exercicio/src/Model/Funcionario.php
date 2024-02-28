@@ -37,7 +37,7 @@ class Funcionario extends Pessoa
 
 	private function setSalario(float $salario): void
 	{
-		$this->salario = $salario;
+		$this->salario = round($salario, 2);
 	}
 
 	public function getCargo(): string
