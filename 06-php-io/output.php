@@ -20,5 +20,5 @@ fwrite(STDERR,'Saída de erro com STDERR');
 
 // Outra coisa interessante: podemos transferir o conteúdo de uma stream para outra sem precisar ler de um para depois escrever; por exemplo,
 // podemos copiar a stream de um arquivo zip para STDOUT sem passar por uma variável, eocnomizando um pouco de memória
-$cursos = fopen('zip://txt/cursos.zip#lista-cursos.txt', 'r');
+$cursos = fopen('zip://files/cursos.zip#lista-cursos.txt', 'r');
 stream_copy_to_stream($cursos, STDOUT);

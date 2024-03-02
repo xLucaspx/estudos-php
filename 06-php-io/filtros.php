@@ -1,8 +1,8 @@
 <?php
 
-require_once "FiltroPartes.php";
+require_once "filtros/FiltroPartes.php";
 
-$file = fopen('txt/lista-cursos.txt', 'r');
+$file = fopen('files/lista-cursos.txt', 'r');
 
 // podemos adicionar filtros à streams; podemos criar filtros ou utilizar os que vem pré-definidos;
 // se antes de realizar o processamento principal que é necessário em uma stream for preciso realizar
@@ -18,6 +18,6 @@ stream_filter_register('filtro.parte', FiltroPartes::class);
 stream_filter_append($file, 'filtro.parte');
 
 echo "Apenas cursos com 'parte' em uppercase:" . PHP_EOL;
-echo fread($file, filesize('txt/lista-cursos.txt'));
+echo mb_strtoupper(fread($file, filesize('files/lista-cursos.txt')));
 
 fclose($file);

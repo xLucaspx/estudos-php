@@ -13,7 +13,7 @@ $curso = fgets($stdin); // fgets pega todos os caracteres até a quebra de linha
 echo "Digite o nome de outro curso: ";
 $curso .= fgets(STDIN);
 
-$filename = 'txt/cursos-write.txt';
+$filename = 'files/cursos-write.txt';
 file_put_contents($filename, $curso, FILE_APPEND);
 
 echo "O arquivo $filename foi atualizado";

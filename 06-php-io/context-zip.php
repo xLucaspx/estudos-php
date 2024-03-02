@@ -7,5 +7,5 @@ $contexto = stream_context_create([
 	]
 ]);
 
-$zip = file_get_contents('zip://txt/cursos-senha.zip#cursos-write.txt', context: $contexto);
+$zip = file_get_contents('zip://files/cursos-senha.zip#cursos-write.txt', context: $contexto);
 echo $zip;
