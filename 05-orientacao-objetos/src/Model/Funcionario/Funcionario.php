@@ -26,7 +26,7 @@ abstract class Funcionario extends Pessoa
 	public function aumentaSalario(float $valorAumento): void
 	{
 		if ($valorAumento <= 0)
-			throw new Exception("O valor do aumento de salário deve ser maior do que 0!");
+			throw new \InvalidArgumentException("O valor do aumento de salário deve ser maior do que 0!");
 
 		$total = $this->salario + $valorAumento;
 		$this->setSalario($total);

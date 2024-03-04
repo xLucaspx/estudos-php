@@ -3,6 +3,8 @@
 namespace Curso\Banco\Model;
 
 // classes final não podem ser extendidas
+use Curso\Banco\Exception\CPFInvalidoException;
+
 final class CPF
 {
 	public readonly string $cpf;
@@ -21,14 +23,14 @@ final class CPF
 	{
 		// validando tamanho e formato do CPF:
 		if (!preg_match('/^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$/', $cpf))
-			throw new Exception("O CPF inserido é inválido!");
+			throw new CPFInvalidoException("O CPF inserido é inválido!");
 
 		// removendo pontos e hífen:
 		$cpf = str_replace(['.', '-'], '', $cpf);
 
 		// validando se o CPF não é composto de números iguais:
 		if (preg_match('/^(\d)\1{10}$/', $cpf))
-			throw new Exception("O CPF inserido é inválido!");
+			throw new CPFInvalidoException("O CPF inserido é inválido!");
 
 		// primeiro verificador:
 		$sum = 0;
@@ -38,7 +40,7 @@ final class CPF
 
 		$rest = ($sum * 10) % 11;
 		if ($rest == 10) $rest = 0;
-		if ($rest != $cpf[9]) throw new Exception("O CPF inserido é inválido!");
+		if ($rest != $cpf[9]) throw new CPFInvalidoException("O CPF inserido é inválido!");
 
 		// segundo verificador:
 		$sum = 0;
@@ -48,7 +50,7 @@ final class CPF
 
 		$rest = ($sum * 10) % 11;
 		if ($rest == 10) $rest = 0;
-		if ($rest != $cpf[10]) throw new Exception("O CPF inserido é inválido!");
+		if ($rest != $cpf[10]) throw new CPFInvalidoException("O CPF inserido é inválido!");
 
 		return $cpf;
 	}

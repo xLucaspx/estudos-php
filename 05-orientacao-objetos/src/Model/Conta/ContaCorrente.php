@@ -2,6 +2,8 @@
 
 namespace Curso\Banco\Model\Conta;
 
+use Curso\Banco\Exception\SaldoInsuficienteException;
+
 class ContaCorrente extends Conta
 {
 	protected function percentualTarifa(): float
@@ -12,11 +14,9 @@ class ContaCorrente extends Conta
 	public function transfere(float $valor, Conta $destino): void
 	{
 		if ($valor <= 0)
-			throw new Exception("O valor inserido para a transferência é inválido!");
-		if ($valor > $this->getSaldo())
-			throw new Exception("Saldo insuficiente para realizar a operação!");
+			throw new \InvalidArgumentException("O valor inserido para a transferência é inválido!");
 
-		$this->saca($valor);
+		$this->saca($valor); // o método saca lança exception se valor > saldo
 		$destino->deposita($valor);
 	}
 

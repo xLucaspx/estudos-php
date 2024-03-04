@@ -5,6 +5,8 @@
 namespace Curso\Banco\Model\Conta;
 // a separação é utilizando contrabarra (\)
 
+use Curso\Banco\Exception\SaldoInsuficienteException;
+
 abstract class Conta
 {
 	// a partir do PHP 7.4 podemos tipar os atributos de uma classe; quando isso é feito, eles serão criados em um
@@ -42,9 +44,9 @@ abstract class Conta
 	public function saca(float $valor): void
 	{
 		if ($valor <= 0)
-			throw new Exception("O valor inserido para o saque é inválido!");
+			throw new \InvalidArgumentException("O valor inserido para o saque é inválido!");
 		if ($valor > $this->saldo)
-			throw new Exception("Saldo insuficiente para realizar a operação!");
+			throw new SaldoInsuficienteException("Saldo insuficiente para realizar a operação!");
 
 		$tarifa = $valor * $this->percentualTarifa();
 		$valor += $tarifa;
@@ -55,7 +57,7 @@ abstract class Conta
 	public function deposita(float $valor): void
 	{
 		if ($valor <= 0)
-			throw new Exception("O valor inserido para o depósito é inválido!");
+			throw new \InvalidArgumentException("O valor inserido para o depósito é inválido!");
 
 		$this->saldo += $valor;
 	}

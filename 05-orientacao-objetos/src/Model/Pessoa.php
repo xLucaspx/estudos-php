@@ -33,6 +33,6 @@ abstract class Pessoa
 	protected final function validaNome(string $nome): void
 	{
 		if (mb_strlen($nome) < 5)
-			throw new Exception("O nome deve ter mais de 5 caracteres!");
+			throw new \InvalidArgumentException("O nome deve ter mais de 5 caracteres!");
 	}
 }
