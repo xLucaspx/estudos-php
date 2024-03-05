@@ -16,7 +16,6 @@ foreach ($cursosPhp as $curso) {
 	echo $curso . PHP_EOL;
 }
 
-
 //echo "\nCursos Java" . PHP_EOL;
 //foreach ($cursosJava as $curso) {
 //	echo $curso . PHP_EOL;
