@@ -1,0 +1,21 @@
+{
+	"name": "xlucaspx/buscador-cursos",
+	"description": "Buscador de cursos criado durante estudos sobre Composer na Alura.",
+	"type": "library",
+	"autoload": {
+		"psr-4": {
+			"Xlucaspx\\BuscadorCursos\\": "src/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Lucas da Paz",
+			"email": "xlucaspx@gmail.com"
+		}
+	],
+	"require": {
+		"guzzlehttp/guzzle": "^7.8",
+		"symfony/dom-crawler": "^7.0",
+		"symfony/css-selector": "^7.0"
+	}
+}
