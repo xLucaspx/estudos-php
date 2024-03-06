@@ -5,8 +5,9 @@ namespace Xlucaspx\BuscadorCursos;
 use GuzzleHttp\ClientInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
-class BuscadorCursos {
-	
+class BuscadorCursos
+{
+
 	public function __construct(
 		private ClientInterface $client
 	) {}
@@ -16,14 +17,11 @@ class BuscadorCursos {
 		$res = $this->client->request("GET", $url);
 		$html = $res->getBody();
 
-		$crawler= new Crawler($html);
+		$crawler = new Crawler($html);
+		$cursos = $crawler->filter("span.card-curso__nome")->each(function ($node) {
+			return $node->text();
+		});
 
-		$cursos = $crawler->filter("span.card-curso__nome");
-
-		$lista = [];
-
-		foreach ($cursos as $curso) $lista[] = $curso->textContent;
-
-		return $lista;
+		return $cursos;
 	}
 }
