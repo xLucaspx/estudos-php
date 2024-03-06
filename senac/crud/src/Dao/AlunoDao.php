@@ -43,6 +43,14 @@ class AlunoDao
 		]);
 	}
 
+	public function deleta(int $id): bool
+	{
+		$sql = "DELETE FROM aluno WHERE id = :id";
+		$ps = $this->con->prepare($sql);
+
+		return $ps->execute(['id' => $id]);
+	}
+
 	public function buscaTodos(): array
 	{
 		$sql = "SELECT id, nome, cpf, email, matricula, data_nascimento FROM aluno";
@@ -60,15 +68,15 @@ class AlunoDao
 	}
 
 	/**
-	 * @param string $matricula a matrícula do aluno buscado
+	 * @param int $id o ID do aluno buscado
 	 * @return DetalhesAluno|false retorna os detalhes do aluno ou falso caso não encontrar a matrícula informa
 	 */
-	public function buscaPorMatricula(string $matricula): DetalhesAluno|false
+	public function buscaPorId(int $id): DetalhesAluno|false
 	{
-		$sql = "SELECT id, nome, cpf, email, matricula, data_nascimento FROM aluno WHERE matricula = :matricula";
+		$sql = "SELECT id, nome, cpf, email, matricula, data_nascimento FROM aluno WHERE id = :id";
 
 		$ps = $this->con->prepare($sql);
-		$ps->execute(['matricula' => $matricula]);
+		$ps->execute(['id' => $id]);
 
 		$res = $ps->fetch(PDO::FETCH_ASSOC);
 

@@ -17,6 +17,7 @@ class Aluno
 
 	public function __construct(DetalhesAluno $dados)
 	{
+		$this->id = $dados->id;
 		$this->nome = $dados->nome;
 		$this->cpf = $dados->cpf;
 		$this->email = $dados->email;

@@ -14,8 +14,8 @@ $aluno = new DadosCadastroAluno("Fulano de Tal", 'fulano@senac.com', '1526374897
 
 var_dump($dao->buscaTodos());
 
-var_dump($dao->atualiza(new DadosAtualizacaoAluno(1, 'Pafúncio Pereira', 'pafuncio@email.com.br')));
+var_dump($dao->atualiza(new DadosAtualizacaoAluno(9, 'Pafúncio Pereira', 'pafuncio@email.com.br')));
 
-$aluno = $dao->buscaPorMatricula('12340987');
+$aluno = $dao->buscaPorId('12340987');
 
 var_dump($aluno);

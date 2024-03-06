@@ -1,0 +1,98 @@
+html {
+	font-family: monospace;
+}
+
+.title-h1 {
+	margin: 5rem auto 3.5em;
+	text-align: center;
+}
+
+.u-list {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	list-style-type: none;
+	gap: 1rem;
+}
+
+.d-list,
+.center-div {
+	width: fit-content;
+	margin: 2rem auto 0;
+}
+
+.dl-term {
+	font-size: 26px;
+	font-weight: 700;
+	margin: 2.5rem 0 1.5rem;
+}
+
+.dl-definition {
+	font-size: 20px;
+}
+
+.a {
+	display: block;
+	text-decoration: none;
+	color: inherit;
+	background: none;
+}
+
+.btn {
+	width: 300px;
+	height: 45px;
+	color: #FFF;
+	background-color: #3582FF;
+	border: 1px solid #3582FF;
+	border-radius: 5px;
+	text-align: center;
+	padding-top: 10px;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: 300;
+}
+
+.btn:hover,
+.btn:active {
+	background-color: #FFF;
+	color: #3582FF;
+	transition: 0.35s ease-in-out;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	align-items: center;
+}
+
+.fieldset {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+table {
+	background-color: #DADADA;
+}
+
+th,
+td {
+	text-align: left;
+	padding: 2px 5px;
+	width: 270px;
+}
+
+th {
+	background-color: #DADADA;
+}
+
+tr:nth-child(odd) {
+	background-color: #E8E8E8;
+}
+
+tr:nth-child(even) {
+	background-color: #EFEFEF;
+}
