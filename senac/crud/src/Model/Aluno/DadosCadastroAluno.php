@@ -16,16 +16,17 @@ class DadosCadastroAluno
 		string $email,
 		string $cpf,
 		public readonly string $matricula,
-		int $diaNascimento,
-		int $mesNacimento,
-		int $anoNascimento
+		string $dataNascimento
 	)
 	{
 		$this->validaNome($nome);
 		$this->email = new Email($email);
 		$this->cpf = new CPF($cpf);
 		$this->validaMatricula($this->matricula);
-		$this->setDataNascimento($diaNascimento, $mesNacimento, $anoNascimento);
+		$ano = substr($dataNascimento, 0, 4);
+		$mes = substr($dataNascimento, 5, 2);
+		$dia = substr($dataNascimento, 8, 2);
+		$this->setDataNascimento($dia, $mes, $ano);
 	}
 
 	public function setDataNascimento(int $dia, int $mes, int $ano): void

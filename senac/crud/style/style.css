@@ -2,9 +2,20 @@ html {
 	font-family: monospace;
 }
 
+header {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin: 5rem auto 3.5rem;
+}
+
+.hidden {
+	display: none;
+}
+
 .title-h1 {
-	margin: 5rem auto 3.5em;
 	text-align: center;
+	margin: 5rem auto 3.5rem;
 }
 
 .u-list {
@@ -32,32 +43,75 @@ html {
 	font-size: 20px;
 }
 
-.a {
-	display: block;
+.a,
+.a-large {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	text-decoration: none;
 	color: inherit;
 	background: none;
 }
 
-.btn {
-	width: 300px;
-	height: 45px;
-	color: #FFF;
-	background-color: #3582FF;
-	border: 1px solid #3582FF;
-	border-radius: 5px;
-	text-align: center;
-	padding-top: 10px;
-	cursor: pointer;
-	font-size: 16px;
-	font-weight: 300;
+.a {
+	max-width: 148px;
+	max-height: 43px;
 }
 
-.btn:hover,
-.btn:active {
-	background-color: #FFF;
-	color: #3582FF;
+.btn {
+	/*width: 300px;*/
+	width: 150px;
+	height: 45px;
+	border: 1px solid transparent;
+	border-radius: 5px;
+	text-align: center;
+	/*padding: 10px 0 2px;*/
+	cursor: pointer;
+	font-family: inherit;
+	font-size: 16px;
+	font-weight: 300;
 	transition: 0.35s ease-in-out;
+}
+
+.btn-primary {
+	color: #FFF;
+	background-color: #3582FF;
+	border-color: #3582FF;
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+	background-color: #FFF;
+	color: #515B3A;
+}
+
+.btn-secondary {
+	color: #FFF;
+	background-color: #515B3A;
+	border-color: #515B3A;
+}
+
+.btn-secondary:hover,
+.btn-secondary:active {
+	background-color: #FFF;
+	color: #515B3A;
+}
+
+.btn-cancel {
+	color: #FFF;
+	background-color: #F4332C;
+	border-color: #F4332C;
+}
+
+.btn-cancel:hover,
+.btn-cancel:active {
+	background-color: #FFF;
+	color: #F4332C;
+}
+
+.btn-large {
+	width: 300px;
+	height: 75px;
 }
 
 .form {
@@ -74,8 +128,18 @@ html {
 	gap: 1rem;
 }
 
+.readonly {
+	background-color: #AFAFAF;
+}
+
+.form-buttons {
+	display: flex;
+	gap: 20px;
+}
+
 table {
 	background-color: #DADADA;
+	margin: 0 auto;
 }
 
 th,
@@ -95,4 +159,20 @@ tr:nth-child(odd) {
 
 tr:nth-child(even) {
 	background-color: #EFEFEF;
+}
+
+.td-options-list {
+	list-style: none;
+	display: flex;
+	gap: 10px;
+}
+
+.list-btn {
+	max-width: 100px;
+	max-height: 35px;
+}
+
+.list-a {
+	max-width: 98px;
+	max-height: 33px;
 }

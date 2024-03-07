@@ -27,9 +27,13 @@ if ($id) {
 	<link rel="stylesheet" href="../style/style.css">
 </head>
 <body>
-<h1><?= $aluno ? "Edição de aluno" : "Cadastro de aluno" ?></h1>
+<header>
+	<h1><?= $aluno ? "Edição de aluno" : "Cadastro de aluno" ?></h1>
 
-<form action="" method="<?= $aluno ? "put" : "post" ?>" class="form">
+	<a href="../index.html" class="a btn btn-secondary">Menu principal</a>
+</header>
+
+<form action="../handle-form-aluno.php" method="post" class="form">
 	<fieldset class="fieldset">
 		<legend class="legend">Dados pessoais</legend>
 
@@ -37,11 +41,11 @@ if ($id) {
 		<input type="text" name="nome" id="nome" class="textfield" required value="<?= $aluno ? $aluno->getNome() : "" ?>">
 
 		<label for="cpf" class="label">CPF: </label>
-		<input type="text" name="cpf" id="cpf" class="textfield" required
+		<input type="text" name="cpf" id="cpf" class="textfield <?= $aluno ? 'readonly' : '' ?>" required
 			value="<?= $aluno ? $aluno->getCpf() : "" ?>" <?= $aluno ? 'readonly' : '' ?>>
 
 		<label for="dataNascimento" class="label">Data de nascimento: </label>
-		<input type="date" name="dataNascimento" id="dataNascimento" required
+		<input type="date" name="dataNascimento" id="dataNascimento" class="<?= $aluno ? 'readonly' : '' ?>" required
 			value="<?= $aluno ? $aluno->dataNascimento->format('Y-m-d') : "" ?>" <?= $aluno ? 'readonly' : '' ?>>
 	</fieldset>
 
@@ -53,11 +57,16 @@ if ($id) {
 			value="<?= $aluno ? $aluno->getEmail() : "" ?>">
 
 		<label for="matricula" class="label">Matrícula </label>
-		<input type="text" name="matricula" id="matricula" class="textfield" required
+		<input type="text" name="matricula" id="matricula" class="textfield <?= $aluno ? 'readonly' : '' ?>" required
 			value="<?= $aluno ? $aluno->matricula : "" ?>" <?= $aluno ? 'readonly' : '' ?>>
 	</fieldset>
 
-	<input type="submit" value="<?= $aluno ? "Atualizar" : "Cadastrar" ?>" class=" btn">
+	<input type="text" name="id" id="id" class="hidden" value="<?= $aluno ? $aluno->id : '' ?>">
+
+	<div class="form-buttons">
+		<button type="submit" class="btn btn-primary"><?= $aluno ? "Atualizar" : "Cadastrar" ?></button>
+		<a href="lista-alunos.php" class="a btn btn-cancel">Cancelar</a>
+	</div>
 </form>
 </body>
 </html>

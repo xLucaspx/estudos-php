@@ -22,7 +22,11 @@ $alunos = $controller->buscaTodos();
 </head>
 <body>
 
-<h1 class="title-h1">Listagem de alunos</h1>
+<header>
+<h1>Listagem de alunos</h1>
+
+	<a href="../index.html" class="a btn btn-secondary">Menu principal</a>
+</header>
 
 <table>
 	<thead>
@@ -47,11 +51,11 @@ $alunos = $controller->buscaTodos();
 			<td><?= $aluno->dataNascimento->format('d/m/Y') ?></td>
 			<td class="td-options">
 				<ul class="td-options-list">
-					<li class="td-options-list-item"><a href="form-aluno.php?id=<?= $aluno->id ?>" class="a btn">Editar</a></li>
+					<li class="td-options-list-item"><a href="form-aluno.php?id=<?= $aluno->id ?>" class="a btn btn-primary list-a">Editar</a></li>
 					<li class="td-options-list-item">
 						<button type="button"
 							onclick="deletaAluno(<?= "$aluno->id, '{$aluno->getNome()}', '$aluno->matricula'" ?>)"
-							class="btn">Excluir
+							class="btn btn-cancel list-btn">Excluir
 						</button>
 					</li>
 				</ul>
