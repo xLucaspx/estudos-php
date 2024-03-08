@@ -47,7 +47,20 @@ $statement->execute();
 // passar a variável onde o parâmetro de saída é armazenado em casos que chamarmos funções stored procedures ou
 // com parâmetro de saída
 
-// para buscar dados do banco, precisamos utilizar query():
+// também podemos executar o prepared statement passando os valores para o execute:
+$student = new Student(null, "Fulano de Tal", new \DateTimeImmutable('1988-06-03'));
+$sqlInsert = "INSERT INTO students (name, birth_date) VALUES (:name, :birth_date);";
+
+$statement = $pdo->prepare($sqlInsert);
+$success = $statement->execute([
+	'name' => $student->name(),
+	'birth_date' => $student->birthDate()->format('Y-m-d')
+]);
+
+// podemos pegar o ID do último registro inserido:
+if ($success) echo "ID: " . $pdo->lastInsertId() . PHP_EOL;
+
+// para buscar dados do banco, precisamos utilizar query(); este método devolve um Statement executado
 $statement = $pdo->query("SELECT id, name, birth_date FROM students");
 
 // o formato padrão da busca do fetchAll (FETCH_BOTH) traz os dados de duas formas: numeric (NUM)
