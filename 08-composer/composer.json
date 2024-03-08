@@ -7,6 +7,21 @@
 			"Xlucaspx\\BuscadorCursos\\": "src/"
 		}
 	},
+	"scripts": {
+		"test": "phpunit tests/BuscadorCursosTest.php",
+		"cs": "phpcs --standard=PSR12 src/",
+		"phan": "phan --allow-polyfill-parser",
+		"check": [
+			"@phan",
+			"@test"
+		],
+		"post-update-cmd": [
+			"@test"
+		]
+	},
+	"scripts-descriptions": {
+		"check": "Roda as verificações do código: PHAN e PHPUNIT"
+	},
 	"authors": [
 		{
 			"name": "Lucas da Paz",
