@@ -7,12 +7,14 @@ use DateTimeImmutable;
 // classe no padrão Entity
 class Student
 {
+	/** @var Phone[] */
+	private array $phones = [];
+
 	public function __construct(
 		private ?int $id,
 		private string $name,
 		private \DateTimeInterface $birthDate
-	) {
-	}
+	) {}
 
 	public function id(): ?int
 	{
@@ -47,6 +49,17 @@ class Student
 		return $this->birthDate()
 			->diff(new DateTimeImmutable())
 			->y;
+	}
+
+	public function addPhone(Phone $phone): void
+	{
+		$this->phones[] = $phone;
+	}
+
+	/** @return Phone[] */
+	public function phones(): array
+	{
+		return $this->phones;
 	}
 
 	public function __toString(): string

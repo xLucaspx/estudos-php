@@ -9,6 +9,8 @@ interface StudentRepository
 {
 	public function findAll(): array;
 
+	public function studentsWithPhones();
+
 	public function findAllByBithDate(\DateTimeInterface $birthDate): array;
 
 	public function save(Student $student): bool;

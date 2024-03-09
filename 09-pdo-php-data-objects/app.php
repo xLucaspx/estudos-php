@@ -41,9 +41,19 @@ $students = $repository->findAllByBithDate(new \DateTimeImmutable('2002-01-01'))
 foreach ($students as $student)
 	echo $student . PHP_EOL;
 
-echo "\n Todos os alunos:" . PHP_EOL;
+echo "\nTodos os alunos:" . PHP_EOL;
 $students = $repository->findAll();
 
 foreach ($students as $student) {
 	echo $student . PHP_EOL;
+}
+
+echo "\nAlunos com telefone:" . PHP_EOL;
+$students = $repository->studentsWithPhones();
+
+foreach ($students as $student) {
+	echo $student . PHP_EOL;
+	foreach ($student->phones() as $key => $phone) {
+		echo "	Telefone $key: {$phone->formattedPhone()}" . PHP_EOL;
+	}
 }

@@ -1,16 +1,18 @@
 {
-    "name": "xlucaspx/php-pdo",
-    "description": "Projeto desenvolvido durante curso de PDO da Alura",
-    "autoload": {
-        "psr-4": {
-            "Xlucaspx\\PhpPdo\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Lucas da Paz",
-            "email": "xlucaspx@gmail.com"
-        }
-    ],
-    "require": {}
+	"name": "xlucaspx/php-pdo",
+	"description": "Projeto desenvolvido durante curso de PDO da Alura",
+	"autoload": {
+		"psr-4": {
+			"Xlucaspx\\PhpPdo\\": "src/"
+		}
+	},
+	"authors": [
+		{
+			"name": "Lucas da Paz",
+			"email": "xlucaspx@gmail.com"
+		}
+	],
+	"require": {
+		"ext-pdo": "*"
+	}
 }

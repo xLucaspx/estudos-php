@@ -2,25 +2,25 @@
 
 namespace Xlucaspx\PhpPdo\Infrastructure\Repository;
 
+use DateTimeImmutable;
+use Xlucaspx\PhpPdo\Domain\Model\Phone;
 use Xlucaspx\PhpPdo\Domain\Model\Student;
 use Xlucaspx\PhpPdo\Domain\Repository\StudentRepository;
-use Xlucaspx\PhpPdo\Infrastructure\Persistence\ConnectionFactory;
 
 class PdoStudentRepository implements StudentRepository
 {
-	
-
 	public function __construct(
 		private \PDO $connection
-	)
-	{}
+	) {}
 
+	/** @return Student[] */
 	public function findAll(): array
 	{
 		$statement = $this->connection->query('SELECT id, name, birth_date FROM students');
 		return $this->hydrateStudentList($statement);
 	}
 
+	/** @return Student[] */
 	public function findAllByBithDate(\DateTimeInterface $birthDate): array
 	{
 		$sql = 'SELECT id, name, birth_date FROM students WHERE birth_date = :birthDate';
@@ -28,6 +28,39 @@ class PdoStudentRepository implements StudentRepository
 		$statement->execute(['birthDate' => $birthDate->format('Y-m-d')]);
 
 		return $this->hydrateStudentList($statement);
+	}
+
+	/** @return Student[] */
+	public function studentsWithPhones(): array
+	{
+		$sql = 'SELECT
+			s.id AS student_id,
+			s.name,
+			s.birth_date,
+			p.id AS phone_id,
+			p.area_code,
+			p.number
+			FROM students s INNER JOIN phones p
+			WHERE s.id = p.student_id';
+		$statement = $this->connection->query($sql);
+		$result = $statement->fetchAll();
+
+		$studentList = [];
+		foreach ($result as $row) {
+			['student_id' => $studentId] = $row;
+
+			// neste método, implementamos de forma muito rudimentar uma estrutura de dados que lembra um conjunto/set:
+			if (!array_key_exists($studentId, $studentList)) {
+				['name' => $name, 'birth_date' => $birthDate] = $row;
+				$studentList[$studentId] = new Student($studentId, $name, new \DateTimeImmutable($birthDate));
+			}
+
+			['phone_id' => $phoneId, 'area_code' => $areaCode, 'number' => $number] = $row;
+			$phone = new Phone($phoneId, $areaCode, $number);
+			$studentList[$studentId]->addPhone($phone);
+		}
+
+		return $studentList;
 	}
 
 	public function save(Student $student): bool
@@ -78,11 +111,25 @@ class PdoStudentRepository implements StudentRepository
 	{
 		$list = [];
 
-		while ($row = $statement->fetch(\PDO::FETCH_ASSOC)) {
+		// não passamos o modo para fetch pois já definimos um padrão via atributo na classe ConnectionFactory
+		while ($row = $statement->fetch()) {
 			['id' => $id, 'name' => $name, 'birth_date' => $birthDate] = $row;
 			$list[] = new Student($id, $name, new \DateTimeImmutable($birthDate));
 		}
-
 		return $list;
 	}
+
+// Esta forma de buscar pode ocasionar um problema N + 1, vamos utilizar outra abordagem
+//	private function fillPhonesOf(Student $student): void
+//	{
+//		$sql = 'SELECT `id`, `area_code`, `number` FROM `phones` WHERE `student_id` = :id';
+//		$statement = $this->connection->prepare($sql);
+//		$statement->bindValue(':id', $student->id(), \PDO::PARAM_INT);
+//		$statement->execute();
+//
+//		while ($phoneData = $statement->fetch()) {
+//			['id' => $id, 'area_code' => $areaCode, 'number' => $number] = $phoneData;
+//			$student->addPhone(new Phone($id, $areaCode, $number));
+//		}
+//	}
 }
