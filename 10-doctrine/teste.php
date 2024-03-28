@@ -12,6 +12,8 @@ var_dump(EntityManagerCreator::createEntityManager());
 
 // php .\bin\doctrine.php orm:schema-tool:create
 
+// php .\bin\doctrine.php orm:schema-tool:update
+
 // php .\bin\doctrine.php dbal:run-sql "SELECT * FROM Student"
 
 // php .\bin\doctrine.php orm:info -> Show basic information about all mapped entities
