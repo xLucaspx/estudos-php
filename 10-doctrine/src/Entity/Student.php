@@ -5,8 +5,11 @@ namespace Xlucaspx\CursoDoctrine\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\{Column, Entity, GeneratedValue, Id, ManyToMany, OneToMany, Table};
+use Xlucaspx\CursoDoctrine\Repository\DoctrineStudentRepository;
 
-#[Entity]
+// referenciamos o repositório criado em dentro do atributo Entity para que
+// o Doctrine consiga fornecer este repositório através do getRepository.
+#[Entity(repositoryClass: DoctrineStudentRepository::class)]
 #[Table(name: 'student')]
 class Student
 {
@@ -16,7 +19,7 @@ class Student
 	// public readonly int $id; // ao tentar remover: PHP Fatal error:  Uncaught LogicException: Attempting to change readonly property
 
 	// targetEntity e mappedBy são obrigatórios
-	#[OneToMany(targetEntity: Phone::class, mappedBy: 'student', cascade: ["persist", "remove"])]
+	#[OneToMany(targetEntity: Phone::class, mappedBy: 'student', fetch: 'EAGER', cascade: ["persist", "remove"])]
 	// private iterable $phones; // podemos manter como iterable ou utilizar diretamente as collections do doctrine
 	private Collection $phones; // as collections também não podem ser readonly pois são modificadas internamente pelo próprio Doctrine
 
@@ -44,7 +47,7 @@ class Student
 		$phone->setStudent($this);
 	}
 
-	public function enrolInCourse(Course $course)
+	public function enrolInCourse(Course $course): void
 	{
 		if ($this->courses->contains($course)) {
 			return;

@@ -4,19 +4,23 @@ use Xlucaspx\CursoDoctrine\Entity\Course;
 use Xlucaspx\CursoDoctrine\Entity\Phone;
 use Xlucaspx\CursoDoctrine\Entity\Student;
 use Xlucaspx\CursoDoctrine\Helper\EntityManagerCreator;
+use Xlucaspx\CursoDoctrine\Repository\DoctrineStudentRepository;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $entityManager = EntityManagerCreator::createEntityManager();
+$studentClass = Student::class;
 
-$studentRepository = $entityManager->getRepository(Student::class);
+/** @var DoctrineStudentRepository $studentRepository */
+$studentRepository = $entityManager->getRepository($studentClass);
 
-echo "Listando com findAll()\n\n";
-/** @var Student[] $studentList */
-$studentList = $studentRepository->findAll();
+$studentList = $studentRepository->studentsWithCourses();
 
 echo "{\n	\"alunos\": [" . PHP_EOL;
-foreach ($studentList as $student) {
+
+$listSize = count($studentList);
+for ($i = 0; $i < $listSize; $i++) {
+	$student = $studentList[$i];
 	$id = $student->id();
 	$name = $student->name();
 	$phones = null;
@@ -37,10 +41,19 @@ foreach ($studentList as $student) {
 				"nome": "$name",
 				"fones": [$phones],
 				"cursos": [$courses]
-			},
-	END. PHP_EOL;
+			}
+	END;
+
+	echo $i == $listSize - 1 ? '' : ',';
+	echo PHP_EOL;
 }
-echo "	]\n}" . PHP_EOL;
+
+$total = count($studentList);
+echo "	],\n	\"total\": $total\n}" . PHP_EOL;
+
+// utilizando o studentRepository:
+// buscando com findAll()
+$studentList = $studentRepository->findAll();
 
 // buscando com find(), recebe o id e retorna o objeto
 $student = $studentRepository->find(1);
@@ -55,4 +68,10 @@ $fulano = $studentRepository->findOneBy([
 	'name' => 'Fulano de Tal'
 ]);
 
-echo "Total de registros: " . $studentRepository->count() . PHP_EOL;
+// total de registros com count (count(*))
+$total = $studentRepository->count();
+
+// total de registros com DQL (count(id))
+$entityManager
+	->createQuery("SELECT COUNT(student) FROM $studentClass student")
+	->getSingleScalarResult();
